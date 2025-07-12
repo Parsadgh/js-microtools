@@ -8,6 +8,8 @@
     <script src="counter.js"></script>
     <script src="bmi.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
     <title>Document</title>
     <style>
         .pop {
@@ -82,6 +84,176 @@
                 transform: translateY(0) scale(1);
             }
         }
+
+
+        /* Container fixed bottom right */
+        .social-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        /* Wrapper flex, rtl and gap */
+        .social-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-direction: row-reverse;
+            cursor: pointer;
+        }
+
+        /* Avatar container with transition scale */
+        .avatar-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+            animation: morph 8s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        .avatar-container:hover {
+            transform: scale(1.1);
+        }
+
+        /* Morph animation */
+        @keyframes morph {
+
+            0%,
+            100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 40% 60% 70% 30% / 50% 60% 30% 60%;
+            }
+        }
+
+        /* Orbit gradient */
+        .orbit-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #facc15, #f472b6, #3b82f6, #facc15);
+            filter: blur(12px);
+            opacity: 0.8;
+            animation: spin 6s linear infinite, pulse-glow 3s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg) scale(1.2);
+            }
+
+            100% {
+                transform: rotate(360deg) scale(1.2);
+            }
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                opacity: 0.6;
+                filter: blur(10px);
+            }
+
+            50% {
+                opacity: 1;
+                filter: blur(16px);
+            }
+        }
+
+        /* Twinkle stars */
+        .twinkle-stars {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background-image: radial-gradient(white 1px, transparent 1px);
+            background-size: 8px 8px;
+            opacity: 0.15;
+            pointer-events: none;
+            animation: twinkle 2.5s ease-in-out infinite alternate;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        @keyframes twinkle {
+            0% {
+                opacity: 0.05;
+            }
+
+            100% {
+                opacity: 0.2;
+            }
+        }
+
+        /* Avatar image */
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Social icons container */
+        .social-icons {
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            transform: translateX(-12px);
+            pointer-events: none;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* Show icons on hover */
+        .social-wrapper:hover .social-icons {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        /* Social icon styles */
+        .social-icons a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #181818;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.1);
+        }
+
+        .social-icons a.github:hover {
+            background-color: #333;
+        }
+
+        .social-icons a.instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .social-icons a.linkedin:hover {
+            background-color: #004182;
+        }
     </style>
 </head>
 
@@ -90,7 +262,7 @@
     <div class="pop" id="popup">
         <div class="box">
             <h2>👋 Hey there!</h2>
-                Click anywhere outside this box to get started. Enjoy the vibe 💫
+            Click anywhere outside this box to get started. Enjoy the vibe 💫
             </p>
             <button id="close-btn">Got it!</button>
         </div>
@@ -152,6 +324,29 @@
             </div>
         </section>
     </main>
+
+
+
+
+    <div class="social-container">
+        <div class="social-wrapper">
+            <div class="avatar-container">
+                <div class="orbit-gradient"></div>
+                <div class="twinkle-stars"></div>
+                <img src="me.jpg" alt="Parsa" class="avatar-img" />
+            </div>
+
+            <div class="social-icons">
+                <a href="https://github.com/Parsadgh" target="_blank" rel="noopener noreferrer" class="github"
+                    aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://instagram.com/parsa.sdgh.dev" target="_blank" rel="noopener noreferrer"
+                    class="instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/in/parsa-sadegh-440a572a2" target="_blank" rel="noopener noreferrer"
+                    class="linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 <script>
