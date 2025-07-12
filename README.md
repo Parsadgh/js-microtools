@@ -4,7 +4,6 @@ A lightweight collection of interactive micro tools built with **HTML, CSS, and 
 Includes a color flipper, counter, BMI calculator, and a popup intro — all in a single smooth tabbed UI. 🧪
 
 🔗 **[Live Demo](https://parsadgh.github.io/js-microtools/)**  
-📸 *Preview below:*
 
 
 ## 🧠 About the Project
