@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="colorFlipper.js"></script>
+    <script src="counter.js"></script>
+    <script src="bmi.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <style>
+        .pop {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(10, 10, 10, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            transition: 0.5s ease;
+            backdrop-filter: blur(6px);
+        }
+
+        .pop.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .pop .box {
+            width: 400px;
+            background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
+            border-radius: 16px;
+            padding: 2rem;
+            color: #f1f1f1;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+            position: relative;
+            animation: popIn 0.4s ease-out;
+        }
+
+        .pop .box h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ffd54f;
+        }
+
+        .pop .box p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .pop .box button {
+            margin-top: 1.5rem;
+            padding: 0.6rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            background-color: mediumseagreen;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pop .box button:hover {
+            background-color: seagreen;
+            transform: scale(1.05);
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- popup -->
+    <div class="pop" id="popup">
+        <div class="box">
+            <h2>👋 Hey there!</h2>
+                Click anywhere outside this box to get started. Enjoy the vibe 💫
+            </p>
+            <button id="close-btn">Got it!</button>
+        </div>
+    </div>
+
+
+    <main>
+        <nav>
+            <ul>
+                <li>colorFlipper</li>
+                <li>counter</li>
+                <li>bmi</li>
+            </ul>
+        </nav>
+
+        <section>
+            <div id="colorFlipper" class="show">
+                <div id="colorFlipper" class="show">
+                    <h1>Color Flipper</h1>
+                    <h2>
+                        background color:
+                        <span id="color">#111111</span>
+                    </h2>
+                    <button id="btn-change" onclick="changeC()">change color</button>
+                </div>
+            </div>
+
+            <div id="counter">
+                <div class="container">
+
+                    <h1>Counter</h1>
+
+                    <div id="value">0</div>
+
+                    <div class="buttons">
+                        <button id="decrease" onclick="inc()">-</button>
+                        <button id="reset" onclick="reset()">Reset</button>
+                        <button id="increase" onclick="add()">+</button>
+                    </div>
+
+                </div>
+            </div>
+
+            </div>
+            <div id="bmi">
+                <h1>BMI Calculator</h1>
+                <div class="bmi-inputs">
+                    <label>
+                        weight (kg):
+                        <input type="number" id="weight" placeholder="70" min="1" step="0.1">
+                    </label>
+                    <label>
+                        height (cm):
+                        <input type="number" id="height" placeholder="175" min="30" step="0.1">
+                    </label>
+                </div>
+                <button id="calculate">Calculate BMI</button>
+                <div id="bmi-result">—</div>
+            </div>
+        </section>
+    </main>
+</body>
+
+<script>
+    const li = document.querySelectorAll('ul>li')
+    const div = document.querySelectorAll('section>div')
+
+    li.forEach((val) => {
+        val.addEventListener('click', (e) => {
+            let temp = e.target.textContent
+
+            // reset
+            div.forEach(val => val.classList.remove('show'))
+
+            // switch
+            document.getElementById(temp).classList.add('show')
+        })
+    })
+
+    // popup
+    const popup = document.getElementById("popup");
+    const closeBtn = document.getElementById("close-btn");
+    const popupBox = popup.querySelector(".box");
+
+    popup.addEventListener("click", () => {
+        popup.classList.add("hide");
+    });
+
+    popupBox.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+
+    closeBtn.addEventListener("click", () => {
+        popup.classList.add("hide");
+    });
+
+</script>
+
+</html>
