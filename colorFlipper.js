@@ -1,3 +1,4 @@
+// khe khe
 function getRandomHexColor() {
   const letters = "0123456789ABCDEF";
   let color = "#";
